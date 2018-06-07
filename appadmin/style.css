@@ -71,6 +71,11 @@ i.red-icon {
 	color: #ff0000;
 }
 
+i.orange-icon {
+	color: #ffbf00;
+}
+
+
 .btn-default.yellow-bt {
 	background: #fff7b3;
 }
@@ -132,6 +137,33 @@ i.red-icon {
     background: #fff;
     border-top-color: #fff;
 }
+
+table.macchinariList {
+	list-style-type: none;
+	margin-left: 0px;
+    padding-left: 0px;
+    width: 100%;
+}
+
+	table.macchinariList thead tr {
+		text-transform: lowercase;
+		padding: 2px 3px;
+		font-size: 12px;
+		font-weight: bold;
+		border-bottom: 1px solid #ccc;
+	}
+
+	table.macchinariList tr {
+		border-bottom: 1px solid #ccc;
+	}
+
+		table.macchinariList tr td {
+			padding: 6px 0px;
+			font-size: 18px;
+			text-transform: uppercase;
+		}
+
+
 
 table td.catCol {
 	vertical-align: middle !important;

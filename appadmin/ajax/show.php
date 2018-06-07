@@ -348,27 +348,49 @@ switch($typeToS) {
           $jmess .= "</a>";
         $jmess .= "</th>";
         $jmess .= "<th>Ospite/Proprietario</th>";
+        $jmess .= "<th>Macchine</th>";
         $jmess .= "<th>Stato</th>";
       $jmess .= "</tr>";
       $jmess .= "</thead>";
 
+      
+      $stmtcount = $conn2->stmt_init();
+
       while($stmt2->fetch()){ 
+
+        // calcolo il mnumero delle macchine per utente
+        $stmtcount->prepare("SELECT M.Modello
+                          FROM macchine M
+                          WHERE M.ID_iscritto = ? ");
+        $stmtcount->bind_param("i",$ID_iscritto); 
+
+        $stmtcount->execute();
+        $stmtcount->store_result();
+        $stmtcount->bind_result($model); 
+        $total_macchine = $stmtcount->num_rows; // numero risultati
 
         $jmess .= "<tr>";
           $jmess .= "<td class=\"catCol\" ><input type=\"checkbox\" class=\"checkbox\" name=\"selItem[]\" value=\"".$ID_iscritto."\" ></td>";
-          $jmess .= "<td class=\"catCol name\"><a href=\"./user-profile.php?act=edit&lingua=".$lingua."&id_user=".$ID_iscritto."\" title=\"Modifica in lingua ".$lingua."\" >".$Email."</a></td>";
+          $jmess .= "<td class=\"catCol name\"><a href=\"./user-profile.php?act=edit&lingua=".$lingua."&id_user=".$ID_iscritto."\" title=\"Modifica iscritto\" >".$Email."</a></td>";
           $jmess .= "<td class=\"catCol name\">".$Nome."</td>";
           $jmess .= "<td class=\"catCol pubb\" >";
             if($Ospite == 1): $jmess .= "Ospite"; endif;
             if($Proprietario == 1): $jmess .= "Proprietario"; endif;
             $jmess .= "</td>";
+          $jmess .= "<td class=\"catCol macchine\">".$total_macchine."</td>";
           $jmess .= "<td class=\"catCol pubb\"><i class=\"fa fa-circle "; 
-            if($Stato == 1): $jmess .= "green-icon"; else: $jmess .= "red-icon"; endif;
+            if($Stato == 1): $jmess .= "green-icon"; elseif($Stato == 0): $jmess .= "red-icon"; else: $jmess .= "orange-icon"; endif;
             $jmess .= "\" aria-hidden=\"true\"></i> </td>";
+          
         $jmess .= "</tr>";
-        
+
+        $total_macchine = 0;
+
+        $stmtcount->free_result();
 
       } // while
+
+      $stmtcount->close();
    
       $stmt2->free_result();
     } else {

@@ -63,7 +63,6 @@ if(isset($_GET['act']) && ($_GET['act'] != "" )) {
           </section>
 
           <!-- Main content -->
-
           <section class="content">
 
             <div class="callout callout-info" id="resultOK" style="display:none;" >
@@ -269,7 +268,42 @@ if(isset($_GET['act']) && ($_GET['act'] != "" )) {
      
                     </div> <!-- end form-group -->
 
+                    <hr id="line">
+                    <?php 
+                    $stmtcount = $conn->stmt_init();
+      
+                    // calcolo il numero delle macchine per utente
+                    $stmtcount->prepare("SELECT M.ID_macchina, M.Modello, M.Seriale
+                                      FROM macchine M
+                                      WHERE M.ID_iscritto = ? ");
+                    $stmtcount->bind_param("i",$id_get_user); 
 
+                    $stmtcount->execute();
+                    $stmtcount->store_result();
+                    $stmtcount->bind_result($id_m, $model, $serial); 
+                    $total_macchine = $stmtcount->num_rows; // numero risultati
+
+                    if($total_macchine > 0){ ?>
+                    <div class="form-group">
+                      <strong>MACCHINARI INSERITI</strong><br/><br/>
+                      <table class="macchinariList">
+                        <thead>
+                          <tr><th>#</th><th>Modello</th><th>Seriale</th></tr>
+                        </thead>
+                      <?php 
+                      while($stmtcount->fetch()){ 
+                      ?>
+                        <tr>
+                          <td><?php echo $id_m; ?></td><td><?php echo $model; ?></td><td><?php echo $serial; ?></td>
+                        </tr>
+                      <?php
+                      }
+                      ?>
+                      </table>
+                    </div> <!-- end form-group -->
+                    <?php
+                    }
+                    ?>
 
                   </div><!-- /.box-body -->
 
