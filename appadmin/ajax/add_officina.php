@@ -7,6 +7,7 @@ $uid=$_POST['uid'];
 
 $uname=$_POST['nameUser'];
 $uemail=$_POST['emailUser'];
+$uweb=$_POST['webUser'];
 
 $phone=$_POST['phoneUser'];
 $fax=$_POST['faxUser'];
@@ -43,9 +44,9 @@ $connup = mysqli_connect('localhost',$configup['username'],$configup['password']
 
 $stmtadd = $connup->stmt_init();
 
-$stmtadd->prepare("INSERT INTO officine ( Nome, Email, Dealer, Officina, Stato, AuthPrivacy, AuthMarketing, Latitudine, Longitudine, Indirizzo, Citta, CAP, Nazione, Telefono, Fax, Immagine, Note) VALUE ( ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? )");
+$stmtadd->prepare("INSERT INTO officine ( Nome, Email, Sitoweb, Dealer, Officina, Stato, AuthPrivacy, AuthMarketing, Latitudine, Longitudine, Indirizzo, Citta, CAP, Nazione, Telefono, Fax, Immagine, Note) VALUE ( ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? )");
 
-$stmtadd->bind_param('ssiiiiiddssssssss', $uname, $uemail, $dealer, $officina, $stato, $privacy, $marketing, $latForm, $longForm, $indirizzoForm, $cittaForm, $capForm,$nazioneForm,$phone,$fax, $img, $note);
+$stmtadd->bind_param('sssiiiiiddssssssss', $uname, $uemail, $uweb, $dealer, $officina, $stato, $privacy, $marketing, $latForm, $longForm, $indirizzoForm, $cittaForm, $capForm, $nazioneForm, $phone, $fax, $img, $note);
 
 $status = 1;
 $status_mess = "Inserimento officina/dealers riuscito.";

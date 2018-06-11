@@ -7,6 +7,7 @@ $uid=$_POST['uid'];
 
 $uname=$_POST['nameUser'];
 $uemail=$_POST['emailUser'];
+$uweb=$_POST['webUser'];
 
 $phone=$_POST['phoneUser'];
 $fax=$_POST['faxUser'];
@@ -47,11 +48,11 @@ $connup = mysqli_connect('localhost',$configup['username'],$configup['password']
 $stmtup = $connup->stmt_init();
 
 // modifico i dati standard dell'utente
-$stmtup->prepare("UPDATE officine SET Nome=?, Email=?, Dealer=?, Officina=?, Stato=?, AuthPrivacy=?, AuthMarketing=?, Latitudine=?, Longitudine=?, Indirizzo=?, Citta=?, CAP=?, Nazione=?, Telefono=?, Fax=?, Immagine=?, Note=? WHERE ID_item=?");
+$stmtup->prepare("UPDATE officine SET Nome=?, Email=?, Sitoweb=?, Dealer=?, Officina=?, Stato=?, AuthPrivacy=?, AuthMarketing=?, Latitudine=?, Longitudine=?, Indirizzo=?, Citta=?, CAP=?, Nazione=?, Telefono=?, Fax=?, Immagine=?, Note=? WHERE ID_item=?");
 
 if ($stmtup === false) { $status = 0; $status_mess = $this->mysqli->error; }
 
-$stmtup->bind_param('ssiiiiiddssssssssi',$uname,$uemail,$dealer,$officina,$stato,$privacy,$marketing,$latForm,$longForm,$indirizzoForm,$cittaForm,$capForm,$nazioneForm,$phone,$fax,$img,$note,$uid);
+$stmtup->bind_param('sssiiiiiddssssssssi',$uname,$uemail,$uweb,$dealer,$officina,$stato,$privacy,$marketing,$latForm,$longForm,$indirizzoForm,$cittaForm,$capForm,$nazioneForm,$phone,$fax,$img,$note,$uid);
 
 $err_status = $stmtup->execute();
 

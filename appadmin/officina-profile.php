@@ -104,13 +104,13 @@ if(isset($_GET['act']) && ($_GET['act'] != "" )) {
 
               $stmt = $conn->stmt_init();
 
-              $stmt->prepare("SELECT DISTINCT O.ID_item, O.Nome, O.Email, O.Password, O.Dealer, O.Officina, O.Stato, O.AuthPrivacy, O.AuthMarketing, O.Latitudine, O.Longitudine, O.Indirizzo, O.Citta, O.CAP, O.Nazione, O.Telefono,O.Fax, O.Immagine, O.Note
+              $stmt->prepare("SELECT DISTINCT O.ID_item, O.Nome, O.Email, O.Sitoweb, O.Password, O.Dealer, O.Officina, O.Stato, O.AuthPrivacy, O.AuthMarketing, O.Latitudine, O.Longitudine, O.Indirizzo, O.Citta, O.CAP, O.Nazione, O.Telefono,O.Fax, O.Immagine, O.Note
                         FROM officine O
                         WHERE O.ID_item = ? LIMIT 0,1"); // 
               $stmt->bind_param("i", $id_item_get);
               $stmt->execute();
               $stmt->store_result();
-              $stmt->bind_result($ID_item, $Nome, $Email, $Password, $Dealer, $Officina, $Stato, $Privacy, $Marketing,$Latitudine, $Longitudine, $Indirizzo, $Citta, $CAP, $Nazione, $Telefono, $Fax, $Immagine, $Note); 
+              $stmt->bind_result($ID_item, $Nome, $Email, $Sitoweb, $Password, $Dealer, $Officina, $Stato, $Privacy, $Marketing,$Latitudine, $Longitudine, $Indirizzo, $Citta, $CAP, $Nazione, $Telefono, $Fax, $Immagine, $Note); 
               $total_res = $stmt->num_rows; // numero risultati
 
               $stmt->fetch(); 
@@ -148,13 +148,18 @@ if(isset($_GET['act']) && ($_GET['act'] != "" )) {
                   <div class="box-body pad ">
 
                       <div class="form-group">
-                        <label for="nameUser">Nome attività</label>
+                        <label for="nameUser">Nome attività *</label>
                         <input type="text" class="form-control" id="nameUser" name="nameUser" placeholder="Nome" value="<?php echo $Nome; ?>" >
                       </div>
 
                       <div class="form-group">
-                        <label for="emailUser">Email *</label>
+                        <label for="emailUser">Email</label>
                         <input type="email" class="form-control" id="emailUser" name="emailUser" placeholder="Email" value="<?php echo $Email; ?>" >
+                      </div>
+
+                      <div class="form-group">
+                      <label for="webUser">Sito web</label>
+                        <input type="text" class="form-control" id="webUser" name="webUser" placeholder="http://www..." value="<?php echo $Sitoweb; ?>" >
                       </div>
 
                       <div class="form-group">
@@ -372,7 +377,7 @@ if(isset($_GET['act']) && ($_GET['act'] != "" )) {
           var newLat, newLong;
 
           // campi obbligatori
-          if ( document.updateForm.emailUser.value == "" ) {
+          if ( document.updateForm.nameUser.value == "" ) {
 
             showError("I Campi * non possono essere vuoti!");
             return false;
@@ -480,7 +485,7 @@ if(isset($_GET['act']) && ($_GET['act'] != "" )) {
           latForm = parseFloat($('#latForm').val());
           longForm = parseFloat($('#longForm').val());
 
-          if (( document.updateForm.emailUser.value == "" ) ) {
+          if (( document.updateForm.nameUser.value == "" ) ) {
 
             showError("I Campi * non possono essere vuoti!");
             return false;
