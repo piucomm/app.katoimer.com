@@ -158,7 +158,7 @@ if(isset($_GET['act']) && ($_GET['act'] != "" )) {
                       </div>
 
                       <div class="form-group">
-                      <label for="webUser">Sito web</label>
+                        <label for="webUser">Sito web</label>
                         <input type="text" class="form-control" id="webUser" name="webUser" placeholder="http://www..." value="<?php echo $Sitoweb; ?>" >
                       </div>
 
@@ -246,6 +246,8 @@ if(isset($_GET['act']) && ($_GET['act'] != "" )) {
 
                 </div><!-- /.col-md-6 -->
 
+                <div class="col-md-12">
+                </div><!-- /.col-md-12 --> 
 
                 <div class="col-md-6">
 

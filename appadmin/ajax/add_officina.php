@@ -44,7 +44,7 @@ $connup = mysqli_connect('localhost',$configup['username'],$configup['password']
 
 $stmtadd = $connup->stmt_init();
 
-$stmtadd->prepare("INSERT INTO officine ( Nome, Email, Sitoweb, Dealer, Officina, Stato, AuthPrivacy, AuthMarketing, Latitudine, Longitudine, Indirizzo, Citta, CAP, Nazione, Telefono, Fax, Immagine, Note) VALUE ( ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? )");
+$stmtadd->prepare("INSERT INTO officine ( Nome, Email, Sitoweb, Dealer, Officina, Stato, AuthPrivacy, AuthMarketing, Latitudine, Longitudine, Indirizzo, Citta, CAP, Nazione, Telefono, Fax, Immagine, Note) VALUE ( ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? )");
 
 $stmtadd->bind_param('sssiiiiiddssssssss', $uname, $uemail, $uweb, $dealer, $officina, $stato, $privacy, $marketing, $latForm, $longForm, $indirizzoForm, $cittaForm, $capForm, $nazioneForm, $phone, $fax, $img, $note);
 
